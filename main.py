@@ -5,9 +5,9 @@ from datetime import datetime
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-CLAUDE_API_KEY  = os.environ["CLAUDE_API_KEY"]
-GMAIL_ADDRESS   = os.environ["GMAIL_ADDRESS"]
-GMAIL_APP_PASS  = os.environ["GMAIL_APP_PASS"]
+CLAUDE_API_KEY = os.environ["CLAUDE_API_KEY"]
+GMAIL_ADDRESS = os.environ["GMAIL_ADDRESS"]
+GMAIL_APP_PASS = os.environ["GMAIL_APP_PASS"]
 RECIPIENT_EMAIL = os.environ["RECIPIENT_EMAIL"]
 
 TOPICS = [
@@ -34,7 +34,7 @@ def fetch_digest():
     today = datetime.now().strftime("%B %d, %Y")
     topic_list = ", ".join(TOPICS)
 
-prompt = f"""You are a financial and travel industry analyst. Today is {today}.
+    prompt = f"""You are a financial and travel industry analyst. Today is {today}.
 
 Search the web for news published in the last 24 hours only across these topics: {topic_list}.
 
@@ -48,7 +48,7 @@ Strict rules:
 - Always include the full URL to the original article
 
 Write a concise daily briefing covering the top 5-8 fresh stories only. For each story:
-- Write a bold headline that is a clickable hyperlink to the article in HTML format: <a href="URL">Headline</a>
+- Write a bold headline that is a clickable hyperlink in HTML format: <a href="URL">Headline</a>
 - 2-3 sentence summary explaining what happened and why it matters
 - Source name and exact publish date
 

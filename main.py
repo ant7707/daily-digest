@@ -21,6 +21,12 @@ TOPICS = [
     "OTA online travel news",
     "fintech partnerships payments",
     "travel industry trends",
+    "Booking Holdings news",
+    "Airbnb news",
+    "travel fintech BNPL",
+    "consumer spending travel",
+    "Block Square Afterpay news",
+    "fintech regulation CFPB",
 ]
 
 
@@ -28,14 +34,23 @@ def fetch_digest():
     today = datetime.now().strftime("%B %d, %Y")
     topic_list = ", ".join(TOPICS)
 
-    prompt = f"""You are a financial and travel industry analyst. Today is {today}.
+prompt = f"""You are a financial and travel industry analyst. Today is {today}.
 
-Search the web for the most recent and relevant news across these topics: {topic_list}.
+Search the web for news published in the last 24 hours only across these topics: {topic_list}.
 
-Write a concise daily briefing covering the top 8-10 stories. For each story:
-- Write a bold headline
+Prioritize these sources when available: Skift, PYMNTS, PhocusWire, TechCrunch, Bloomberg, Reuters, Forbes, Business Insider.
+
+Strict rules:
+- Only include stories published today or yesterday ({today})
+- Do not include anything older than 48 hours
+- Do not repeat stories covered in previous digests
+- If there is no new news on a topic today, skip it entirely
+- Always include the full URL to the original article
+
+Write a concise daily briefing covering the top 5-8 fresh stories only. For each story:
+- Write a bold headline that is a clickable hyperlink to the article in HTML format: <a href="URL">Headline</a>
 - 2-3 sentence summary explaining what happened and why it matters
-- Source name and approximate date
+- Source name and exact publish date
 
 Group stories under these two sections:
 ## BNPL & Fintech
@@ -47,7 +62,7 @@ Keep the tone professional and direct. No filler. Focus on what matters for some
 
     response = client.messages.create(
         model="claude-opus-4-5",
-        max_tokens=2000,
+        max_tokens=3000,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
         messages=[{"role": "user", "content": prompt}],
     )

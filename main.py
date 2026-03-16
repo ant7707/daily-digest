@@ -61,7 +61,7 @@ Keep the tone professional and direct. No filler. Focus on what matters for some
     client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
 
     response = client.messages.create(
-        model="claude-opus-4-5",
+        model="claude-sonnet-4-6",
         max_tokens=3000,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
         messages=[{"role": "user", "content": prompt}],

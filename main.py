@@ -19,13 +19,11 @@ TOPICS = [
     "Hotels.com news",
     "Vrbo news",
     "OTA online travel news",
-    "fintech partnerships payments",
     "travel industry trends",
     "Booking Holdings news",
     "Airbnb news",
     "travel fintech BNPL",
     "consumer spending travel",
-    "Block Square Afterpay news",
     "fintech regulation CFPB",
 ]
 
@@ -61,7 +59,7 @@ Keep the tone professional and direct. No filler. Focus on what matters for some
     client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
 
     response = client.messages.create(
-        model="claude-sonnet-4-6",
+        model="claude-haiku-4-5-20251001",
         max_tokens=2500,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
         messages=[{"role": "user", "content": prompt}],
